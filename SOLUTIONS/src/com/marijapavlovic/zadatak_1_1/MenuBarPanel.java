@@ -18,7 +18,6 @@ public class MenuBarPanel extends JPanel {
         initPanelComps();
         layoutComps();
         activateComps();
-
     }
 
     private void initPanelComps() {
@@ -44,24 +43,37 @@ public class MenuBarPanel extends JPanel {
 
     private void activateComps() {
         if (menuBarListener != null) {
+
             load.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    menuBarListener.loadEventOccurred(new MenuBarEvent(this));
+                    System.out.println("Load Action Performed");
+                    MenuBarEvent menuBarEvent = new MenuBarEvent(this);
+                    menuBarEvent.setLoadItemClicked(true);
+                    menuBarListener.loadEventOccurred(menuBarEvent);
                 }
             });
+
             save.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    menuBarListener.saveEventOccurred(new MenuBarEvent(this));
+                    System.out.println("Save Action Performed");
+                    MenuBarEvent menuBarEvent = new MenuBarEvent(this);
+                    menuBarEvent.setSaveItemClicked(true);
+                    menuBarListener.saveEventOccurred(menuBarEvent);
                 }
             });
+
             exit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    menuBarListener.exitEventOccurred(new MenuBarEvent(this));
+                    System.out.println("Exit Action Performed");
+                    MenuBarEvent menuBarEvent = new MenuBarEvent(this);
+                    menuBarEvent.setExitItemClicked(true);
+                    menuBarListener.exitEventOccurred(menuBarEvent);
                 }
             });
         }
     }
+
 }

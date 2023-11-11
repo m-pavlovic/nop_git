@@ -85,19 +85,25 @@ public class MainFrame extends JFrame {
         menuBarListener = new MenuBarListener() {
             @Override
             public void loadEventOccurred(MenuBarEvent menuBarEvent) {
-
+                System.out.println("Load Event Occurred");
+                // Your load logic here...
             }
 
             @Override
             public void saveEventOccurred(MenuBarEvent menuBarEvent) {
-
+                System.out.println("Save Event Occurred");
+                // Your save logic here...
             }
 
             @Override
             public void exitEventOccurred(MenuBarEvent menuBarEvent) {
+                System.out.println("Exit Event Occurred");
                 System.exit(0);
             }
         };
         menuBarPanel.setMenuBarListener(menuBarListener);
+
+
     }
+
 }
