@@ -4,13 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class CalculationPanel extends JPanel {
 
     private JPanel insidePanel = new JPanel();
     private JLabel firstNumberLabel = new JLabel("First number:");
     private JLabel secondNumberLabel = new JLabel("Second number:");
-    private JComboBox<String> operationComboBox = new JComboBox<>(new String[]{"Addition", "Subtraction", "Division", "Multiplication", "Power To"});
+    //private JComboBox<String> operationComboBox = new JComboBox<>(new String[]{"Addition", "Subtraction", "Division", "Multiplication", "Power To"});
+    private String operations[] = {"Addition", "Subtraction", "Division", "Multiplication", "Power To"};
+    private JList<String> list = new JList<>(operations);
+    private JScrollPane scrollPane = new JScrollPane();
     private JTextField firstNumberTextField = new JTextField();
     private JTextField secondNumberTextField = new JTextField();
     private JButton calculateButton = new JButton("Calculate");
@@ -26,7 +30,10 @@ public class CalculationPanel extends JPanel {
         firstNumberTextField.setBounds(120, 100, 100, 25);
         secondNumberLabel.setBounds(20, 140, 100, 25);
         secondNumberTextField.setBounds(120, 140, 100, 25);
-        operationComboBox.setBounds(300, 110, 200, 40);
+        scrollPane.setBounds(300, 80, 200, 80);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setViewportView(list);
         calculateButton.setBounds(600, 220, 100, 25);
         resultTextField.setBounds(570, 120, 150, 30);
         resultTextField.setEditable(false);
@@ -35,7 +42,7 @@ public class CalculationPanel extends JPanel {
         insidePanel.add(firstNumberTextField);
         insidePanel.add(secondNumberLabel);
         insidePanel.add(secondNumberTextField);
-        insidePanel.add(operationComboBox);
+        insidePanel.add(scrollPane);
         insidePanel.add(calculateButton);
         insidePanel.add(resultTextField);
 
@@ -54,7 +61,7 @@ public class CalculationPanel extends JPanel {
                 try {
                     double firstNumber = Double.parseDouble(firstNumberTextField.getText());
                     double secondNumber = Double.parseDouble(secondNumberTextField.getText());
-                    String operation = (String) operationComboBox.getSelectedItem();
+                    String operation = list.getSelectedValue();
 
                     if (calculationPanelListener != null) {
                         calculationPanelListener.calculationEventOccurred(new CalculationPanelEvent(this, firstNumber, secondNumber, operation));
