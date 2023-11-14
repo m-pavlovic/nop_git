@@ -25,10 +25,10 @@ public class CalculationPanel extends JPanel {
         insidePanel.setPreferredSize(new Dimension(760, 290));
 
         firstNumberLabel.setBounds(20, 100, 100, 25);
-        firstNumberTextField.setBounds(120, 100, 100, 25);
-        secondNumberLabel.setBounds(20, 140, 100, 25);
-        secondNumberTextField.setBounds(120, 140, 100, 25);
-        scrollPane.setBounds(300, 80, 200, 80);
+        firstNumberTextField.setBounds(160, 100, 100, 25);
+        secondNumberLabel.setBounds(20, 140, 120, 25);
+        secondNumberTextField.setBounds(160, 140, 100, 25);
+        scrollPane.setBounds(300, 100, 200, 60);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setViewportView(list);
