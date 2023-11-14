@@ -85,37 +85,26 @@ public class MainFrame extends JFrame {
         };
         calculationPanel.setCalculationPanelListener(calculationPanelListener);
 
-        menuBarListener = new MenuBarListener() {
-            @Override
-            public void loadEventOccurred(MenuBarEvent menuBarEvent) {
-                System.out.println("Load Event Occurred");
-                // Your load logic here...
-            }
-
+        menuBarPanel.setMenuBarListener(new MenuBarListener() {
             @Override
             public void saveEventOccurred(MenuBarEvent menuBarEvent) {
-                System.out.println("Save Event Occurred");
-                // Your save logic here...
+                System.out.println("Saving to file...");
+
             }
 
             @Override
             public void exitEventOccurred(MenuBarEvent menuBarEvent) {
-                System.out.println("Exit Event Occurred");
                 System.exit(0);
+
             }
-        };
-        menuBarPanel.setMenuBarListener(menuBarListener);
 
+            @Override
+            public void loadEventOccurred(MenuBarEvent menuBarEvent) {
+                System.out.println("Loading from file...");
 
+            }
+        });
+
+        menuBarPanel.activateComps();
     }
-
-    private void checkIfFolderExists() {
-        File folder = new File("data_save_load");
-        if (!folder.exists()) {
-            folder.mkdir();
-        }
-    }
-
-
-
 }

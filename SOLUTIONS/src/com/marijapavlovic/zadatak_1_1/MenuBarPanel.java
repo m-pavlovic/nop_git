@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 
 public class MenuBarPanel extends JPanel {
 
@@ -41,36 +42,24 @@ public class MenuBarPanel extends JPanel {
         this.menuBarListener = menuBarListener;
     }
 
-    private void activateComps() {
+    public void activateComps() {
         if (menuBarListener != null) {
-
             load.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("Load Action Performed");
-                    MenuBarEvent menuBarEvent = new MenuBarEvent(this);
-                    menuBarEvent.setLoadItemClicked(true);
-                    menuBarListener.loadEventOccurred(menuBarEvent);
+                    menuBarListener.loadEventOccurred(new MenuBarEvent(this));
                 }
             });
-
             save.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("Save Action Performed");
-                    MenuBarEvent menuBarEvent = new MenuBarEvent(this);
-                    menuBarEvent.setSaveItemClicked(true);
-                    menuBarListener.saveEventOccurred(menuBarEvent);
+                    menuBarListener.saveEventOccurred(new MenuBarEvent(this));
                 }
             });
-
             exit.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    System.out.println("Exit Action Performed");
-                    MenuBarEvent menuBarEvent = new MenuBarEvent(this);
-                    menuBarEvent.setExitItemClicked(true);
-                    menuBarListener.exitEventOccurred(menuBarEvent);
+                    menuBarListener.exitEventOccurred(new MenuBarEvent(this));
                 }
             });
         }
