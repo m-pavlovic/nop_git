@@ -6,7 +6,7 @@ public class SubtractionCalculation implements CalculationStrategy {
     @Override
     public double calculate(double firstNumber, double secondNumber) {
         result = firstNumber - secondNumber;
-        ViewPanel.appendToTextArea(firstNumber + " - " + secondNumber + " = " + result + "\n");
+        ViewPanel.appendToTextArea();
 
         return result;
 

@@ -4,19 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class CalculationPanel extends JPanel {
 
     private JPanel insidePanel = new JPanel();
     private JLabel firstNumberLabel = new JLabel("First number:");
     private JLabel secondNumberLabel = new JLabel("Second number:");
-    //private JComboBox<String> operationComboBox = new JComboBox<>(new String[]{"Addition", "Subtraction", "Division", "Multiplication", "Power To"});
-    private String operations[] = {"Addition", "Subtraction", "Division", "Multiplication", "Power To"};
-    private JList<String> list = new JList<>(operations);
+    private static String[] operations = {"Addition", "Subtraction", "Division", "Multiplication", "Power To"};
+    private static JList<String> list = new JList<>(operations);
     private JScrollPane scrollPane = new JScrollPane();
-    private JTextField firstNumberTextField = new JTextField();
-    private JTextField secondNumberTextField = new JTextField();
+    private static JTextField firstNumberTextField = new JTextField();
+    private static JTextField secondNumberTextField = new JTextField();
     private JButton calculateButton = new JButton("Calculate");
     public static JTextField resultTextField = new JTextField();
     private CalculationPanelListener calculationPanelListener;
@@ -62,6 +60,7 @@ public class CalculationPanel extends JPanel {
                     double firstNumber = Double.parseDouble(firstNumberTextField.getText());
                     double secondNumber = Double.parseDouble(secondNumberTextField.getText());
                     String operation = list.getSelectedValue();
+                    fillCalcData();
 
                     if (calculationPanelListener != null) {
                         calculationPanelListener.calculationEventOccurred(new CalculationPanelEvent(this, firstNumber, secondNumber, operation));
@@ -74,7 +73,10 @@ public class CalculationPanel extends JPanel {
         });
     }
 
-    public static JTextField getResultTextField() {
-        return resultTextField;
+    public static void fillCalcData() {
+        ViewPanel.calcData.setFirstNumber(Double.parseDouble(firstNumberTextField.getText()));
+        ViewPanel.calcData.setSecondNumber(Double.parseDouble(secondNumberTextField.getText()));
+        ViewPanel.calcData.setOperation(list.getSelectedValue());
+        ViewPanel.calcData.setResult(resultTextField.getText());
     }
 }
