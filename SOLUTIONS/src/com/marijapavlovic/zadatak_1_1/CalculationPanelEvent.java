@@ -21,6 +21,7 @@ public class CalculationPanelEvent extends EventObject {
         this.operation = operation;
     }
 
+
     public double getFirstNumber() {
         return firstNumber;
     }

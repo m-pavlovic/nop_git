@@ -2,6 +2,8 @@ package com.marijapavlovic.zadatak_1_1;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
+import java.util.Map;
 
 public class MainFrame extends JFrame {
 
@@ -70,6 +72,7 @@ public class MainFrame extends JFrame {
         if (calculation != null) {
             calculation.calculate(e.getFirstNumber(), e.getSecondNumber());
             calculation.appendToResultField();
+            calculation.fillCalcData();
         }
     }
 
@@ -105,5 +108,14 @@ public class MainFrame extends JFrame {
 
 
     }
+
+    private void checkIfFolderExists() {
+        File folder = new File("data_save_load");
+        if (!folder.exists()) {
+            folder.mkdir();
+        }
+    }
+
+
 
 }

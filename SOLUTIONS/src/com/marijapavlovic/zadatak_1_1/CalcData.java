@@ -14,37 +14,6 @@ public class CalcData {
         this.result = result;
     }
 
-    public double getFirstNumber() {
-        return firstNumber;
-    }
-
-    public double getSecondNumber() {
-        return secondNumber;
-    }
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public String getResult() {
-        return result;
-    }
-
-    public void setFirstNumber(double firstNumber) {
-        this.firstNumber = firstNumber;
-    }
-
-    public void setSecondNumber(double secondNumber) {
-        this.secondNumber = secondNumber;
-    }
-
-    public void setOperation(String operation) {
-        this.operation = operation;
-    }
-
-    public void setResult(String result) {
-        this.result = result;
-    }
 
     @Override
     public String toString() {
@@ -53,6 +22,6 @@ public class CalcData {
                 ", secondNumber=" + secondNumber +
                 ", operation='" + operation + '\'' +
                 ", result='" + result + '\'' +
-                '}';
+                '}' + "\n" + "======================================================================================";
     }
 }

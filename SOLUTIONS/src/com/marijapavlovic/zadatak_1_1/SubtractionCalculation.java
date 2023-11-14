@@ -6,8 +6,6 @@ public class SubtractionCalculation implements CalculationStrategy {
     @Override
     public double calculate(double firstNumber, double secondNumber) {
         result = firstNumber - secondNumber;
-        ViewPanel.appendToTextArea();
-
         return result;
 
     }
@@ -16,5 +14,11 @@ public class SubtractionCalculation implements CalculationStrategy {
     public void appendToResultField() {
         CalculationPanel.resultTextField.setText(String.valueOf(result));
 
+    }
+
+    @Override
+    public void fillCalcData() {
+        CalcData calcData = new CalcData(CalculationPanel.getFirstNumber(), CalculationPanel.getSecondNumber(), "Subtraction", String.valueOf(result));
+        ViewPanel.appendToTextArea(calcData);
     }
 }

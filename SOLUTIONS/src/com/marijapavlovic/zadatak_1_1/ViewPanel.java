@@ -6,7 +6,7 @@ public class ViewPanel extends JPanel {
 
     static JTextArea textArea = new JTextArea(20, 69);
     JScrollPane scrollPane = new JScrollPane(textArea);
-    static CalcData calcData = new CalcData(0, 0, "", "");
+
 
     public ViewPanel() {
         textArea.setEditable(false);
@@ -15,7 +15,7 @@ public class ViewPanel extends JPanel {
         add(scrollPane);
     }
 
-    public static void appendToTextArea() {
+    public static void appendToTextArea(CalcData calcData) {
         textArea.append(calcData.toString() + "\n");
     }
 }

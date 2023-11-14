@@ -60,7 +60,6 @@ public class CalculationPanel extends JPanel {
                     double firstNumber = Double.parseDouble(firstNumberTextField.getText());
                     double secondNumber = Double.parseDouble(secondNumberTextField.getText());
                     String operation = list.getSelectedValue();
-                    fillCalcData();
 
                     if (calculationPanelListener != null) {
                         calculationPanelListener.calculationEventOccurred(new CalculationPanelEvent(this, firstNumber, secondNumber, operation));
@@ -72,11 +71,33 @@ public class CalculationPanel extends JPanel {
             }
         });
     }
-
-    public static void fillCalcData() {
-        ViewPanel.calcData.setFirstNumber(Double.parseDouble(firstNumberTextField.getText()));
-        ViewPanel.calcData.setSecondNumber(Double.parseDouble(secondNumberTextField.getText()));
-        ViewPanel.calcData.setOperation(list.getSelectedValue());
-        ViewPanel.calcData.setResult(resultTextField.getText());
+    
+    public static double getFirstNumber() {
+        return Double.parseDouble(firstNumberTextField.getText());
     }
+    
+    public static double getSecondNumber() {
+        return Double.parseDouble(secondNumberTextField.getText());
+    }
+    
+    public static void setFirstNumber(double firstNumber) {
+        firstNumberTextField.setText(String.valueOf(firstNumber));
+    }
+    
+    public static void setSecondNumber(double secondNumber) {
+        secondNumberTextField.setText(String.valueOf(secondNumber));
+    }
+    
+    public static void setResult(double result) {
+        resultTextField.setText(String.valueOf(result));
+    }
+    
+    public static void setOperation(String operation) {
+        list.setSelectedValue(operation, true);
+    }
+    
+    public static void setCalcDataList(String calcDataList) {
+        list.setSelectedValue(calcDataList, true);
+    }
+    
 }
