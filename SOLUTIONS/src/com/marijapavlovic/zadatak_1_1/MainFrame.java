@@ -88,7 +88,7 @@ public class MainFrame extends JFrame {
         menuBarPanel.setMenuBarListener(new MenuBarListener() {
             @Override
             public void saveEventOccurred(MenuBarEvent menuBarEvent) {
-                System.out.println("Saving to file...");
+
 
             }
 
@@ -100,7 +100,36 @@ public class MainFrame extends JFrame {
 
             @Override
             public void loadEventOccurred(MenuBarEvent menuBarEvent) {
-                System.out.println("Loading from file...");
+//                JOptionPane.showInputDialog(null, "Which format would you like to load from?",
+//                        "Load", JOptionPane.QUESTION_MESSAGE, null, new String[]{"txt", "bin"}, "txt");
+//                if (JOptionPane.YES_OPTION == 0) {
+//                    try {
+//                        FileInputStream fis = new FileInputStream("calcData.txt");
+//                        ObjectInputStream ois = new ObjectInputStream(fis);
+//                        Map<String, CalcData> calcDataMap = (Map<String, CalcData>) ois.readObject();
+//                        for (Map.Entry<String, CalcData> entry : calcDataMap.entrySet()) {
+//                            System.out.println(entry.getKey() + " " + entry.getValue());
+//                        }
+//                        ois.close();
+//                        fis.close();
+//                    } catch (IOException | ClassNotFoundException ex) {
+//                        ex.printStackTrace();
+//                    }
+//                } else {
+//                    try {
+//                        FileInputStream fis = new FileInputStream("calcData.bin");
+//                        ObjectInputStream ois = new ObjectInputStream(fis);
+//                        Map<String, CalcData> calcDataMap = (Map<String, CalcData>) ois.readObject();
+//                        for (Map.Entry<String, CalcData> entry : calcDataMap.entrySet()) {
+//                            System.out.println(entry.getKey() + " " + entry.getValue());
+//                        }
+//                        ois.close();
+//                        fis.close();
+//                    } catch (IOException | ClassNotFoundException ex) {
+//                        ex.printStackTrace();
+//                    }
+//                }
+
 
             }
         });

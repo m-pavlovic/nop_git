@@ -16,28 +16,4 @@ public class MenuBarEvent extends EventObject {
         this.saveItemClicked = false;
         this.exitItemClicked = false;
     }
-
-    private boolean isLoadItemClicked() {
-        return loadItemClicked;
-    }
-
-    public void setLoadItemClicked(boolean loadItemClicked) {
-        this.loadItemClicked = loadItemClicked;
-    }
-
-    private boolean isSaveItemClicked() {
-        return saveItemClicked;
-    }
-
-    public void setSaveItemClicked(boolean saveItemClicked) {
-        this.saveItemClicked = saveItemClicked;
-    }
-
-    boolean isExitItemClicked() {
-        return exitItemClicked;
-    }
-
-    public void setExitItemClicked(boolean exitItemClicked) {
-        this.exitItemClicked = exitItemClicked;
-    }
 }
