@@ -68,6 +68,7 @@ public class CalculationPanel extends JPanel {
 
                     if(calculationPanelListener != null) {
                         calculationPanelListener.calculationEventOccurred(calculationPanelEvent);
+                        resultTextField.setText(String.valueOf(result));
                     }
 
                 } catch (NumberFormatException ex) {

@@ -8,7 +8,7 @@ public class CalculationPanelEvent extends EventObject {
     private double firstNumber;
     private double secondNumber;
     private String operation;
-    private CalcData calcData;
+    private static CalcData calcData;
 
 
     public CalculationPanelEvent(Object source) {
@@ -29,20 +29,7 @@ public class CalculationPanelEvent extends EventObject {
         this.calcData = calcData;
     }
 
-
-    public double getFirstNumber() {
-        return firstNumber;
-    }
-
-    public double getSecondNumber() {
-        return secondNumber;
-    }
-
-    public String getOperation() {
-        return operation;
-    }
-
-    public CalcData getData() {
+    public static CalcData getData() {
         return calcData;
     }
 }

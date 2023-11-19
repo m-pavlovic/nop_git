@@ -1,6 +1,7 @@
 package com.marijapavlovic.zadatak_1_1;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class ViewPanel extends JPanel {
 

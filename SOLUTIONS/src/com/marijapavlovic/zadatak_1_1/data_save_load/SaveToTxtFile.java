@@ -12,7 +12,7 @@ public class SaveToTxtFile implements SaveStrategy {
 
     @Override
     public void saveToFile(String path, ArrayList<CalcData> calcData) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(path), true))){
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))){
             for (CalcData data : calcData){
                 bw.write(data.toString());
                 bw.newLine();

@@ -12,7 +12,7 @@ public class SaveToBinFile implements SaveStrategy {
 
     @Override
     public void saveToFile(String path, ArrayList<CalcData> calcData){
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(new File(path), true))){
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path, true))){
             for (CalcData data : calcData){
                 oos.writeObject(data);
             }

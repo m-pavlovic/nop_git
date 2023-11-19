@@ -98,9 +98,9 @@ public class MainFrame extends JFrame {
                 if (value == JFileChooser.APPROVE_OPTION) {
                     String path = fileChooser.getSelectedFile().getPath();
                     if (path.endsWith(".txt")) {
-                        new SaveToTxtFile();
+                        new SaveToTxtFile().saveToFile(path, calcData);
                     } else if (path.endsWith(".bin")) {
-                        new SaveToBinFile();
+                        new SaveToBinFile().saveToFile(path, calcData);
                     } else {
                         JOptionPane.showMessageDialog(null, "Please choose a file extension!", "Error", JOptionPane.ERROR_MESSAGE);
                     }
