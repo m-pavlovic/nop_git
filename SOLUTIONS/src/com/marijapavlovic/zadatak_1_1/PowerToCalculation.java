@@ -11,15 +11,8 @@ public class PowerToCalculation implements CalculationStrategy {
     }
 
     @Override
-    public void appendToResultField() {
+    public void appendResult() {
         CalculationPanel.resultTextField.setText(String.valueOf(result));
-
-    }
-
-    @Override
-    public void fillCalcData() {
-        CalcData calcData = new CalcData(CalculationPanel.getFirstNumber(), CalculationPanel.getSecondNumber(), "Power to", String.valueOf(result));
-        ViewPanel.appendToTextArea(calcData);
 
     }
 }

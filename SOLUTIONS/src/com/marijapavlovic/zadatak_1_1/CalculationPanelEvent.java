@@ -8,17 +8,25 @@ public class CalculationPanelEvent extends EventObject {
     private double firstNumber;
     private double secondNumber;
     private String operation;
+    private CalcData calcData;
 
 
     public CalculationPanelEvent(Object source) {
         super(source);
     }
 
-    public CalculationPanelEvent(ActionListener source, double firstNumber, double secondNumber, String operation) {
+
+    public CalculationPanelEvent(Object source, CalcData calcData) {
+        super(source);
+        this.calcData = calcData;
+    }
+
+    public CalculationPanelEvent(Object source, double firstNumber, double secondNumber, String operation, CalcData calcData) {
         super(source);
         this.firstNumber = firstNumber;
         this.secondNumber = secondNumber;
         this.operation = operation;
+        this.calcData = calcData;
     }
 
 
@@ -32,5 +40,9 @@ public class CalculationPanelEvent extends EventObject {
 
     public String getOperation() {
         return operation;
+    }
+
+    public CalcData getData() {
+        return calcData;
     }
 }

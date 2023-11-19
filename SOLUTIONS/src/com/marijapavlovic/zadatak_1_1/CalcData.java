@@ -1,13 +1,15 @@
 package com.marijapavlovic.zadatak_1_1;
 
-public class CalcData {
+import java.io.Serializable;
+
+public class CalcData implements Serializable {
 
     private double firstNumber;
     private double secondNumber;
     private String operation;
-    private String result;
+    private double result;
 
-    public CalcData(double firstNumber, double secondNumber, String operation, String result) {
+    public CalcData(double firstNumber, double secondNumber, String operation, double result) {
         this.firstNumber = firstNumber;
         this.secondNumber = secondNumber;
         this.operation = operation;

@@ -11,14 +11,8 @@ public class MultiplicationCalculation implements CalculationStrategy {
     }
 
     @Override
-    public void appendToResultField() {
+    public void appendResult() {
         CalculationPanel.resultTextField.setText(String.valueOf(result));
 
-    }
-
-    @Override
-    public void fillCalcData() {
-        CalcData calcData = new CalcData(CalculationPanel.getFirstNumber(), CalculationPanel.getSecondNumber(), "Multiplication", String.valueOf(result));
-        ViewPanel.appendToTextArea(calcData);
     }
 }

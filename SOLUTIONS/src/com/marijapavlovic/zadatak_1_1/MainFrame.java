@@ -1,9 +1,15 @@
 package com.marijapavlovic.zadatak_1_1;
 
+import com.marijapavlovic.zadatak_1_1.data_save_load.LoadFromBinFile;
+import com.marijapavlovic.zadatak_1_1.data_save_load.LoadFromTxtFile;
+import com.marijapavlovic.zadatak_1_1.data_save_load.SaveToBinFile;
+import com.marijapavlovic.zadatak_1_1.data_save_load.SaveToTxtFile;
+
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.*;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
 
@@ -11,6 +17,8 @@ public class MainFrame extends JFrame {
     private CalculationPanel calculationPanel;
     private MenuBarPanel menuBarPanel;
     private CalculationPanelListener calculationPanelListener;
+    private JFileChooser fileChooser = new JFileChooser();
+    private ArrayList<CalcData> calcData = new ArrayList<>();
     private MenuBarListener menuBarListener;
     private AdditionCalculation additionCalculation;
     private SubtractionCalculation subtractionCalculation;
@@ -36,6 +44,15 @@ public class MainFrame extends JFrame {
         viewPanel = new ViewPanel();
         calculationPanel = new CalculationPanel();
         menuBarPanel = new MenuBarPanel();
+        calcData = new ArrayList<>();
+        fileChooser.setCurrentDirectory(new File("com/marijapavlovic/zadatak_1_1/data_save_load"));
+        FileNameExtensionFilter filter1 = new FileNameExtensionFilter(
+                "TXT files", "txt");
+        FileNameExtensionFilter filter2 = new FileNameExtensionFilter(
+                "BIN files", "bin");
+        fileChooser.setFileFilter(filter1);
+        fileChooser.addChoosableFileFilter(filter2);
+        alignSaveWithExtensions();
     }
 
     private void layoutComps() {
@@ -45,42 +62,31 @@ public class MainFrame extends JFrame {
         add(menuBarPanel, BorderLayout.NORTH);
     }
 
-    private void performCalculation(CalculationPanelEvent e) {
-        CalculationStrategy calculation = null;
+    private void alignSaveWithExtensions(){
+        fileChooser.addActionListener(ae -> {
+            if (ae.getActionCommand().equals(JFileChooser.APPROVE_SELECTION)){
+                String path = fileChooser.getSelectedFile().getPath();
+                if (fileChooser.getFileFilter().getDescription().equals("TXT files")){
+                    if (!path.endsWith(".txt")){
+                        path += ".txt";
+                    }
+                } else if (fileChooser.getFileFilter().getDescription().equals("BIN files")){
+                    if (!path.endsWith(".bin")){
+                        path += ".bin";
+                    }
+                }
+                fileChooser.setSelectedFile(new File(path));
+            }
+        });
 
-        switch (e.getOperation()) {
-            case "Addition":
-                calculation = new AdditionCalculation();
-                break;
-            case "Subtraction":
-                calculation = new SubtractionCalculation();
-                break;
-            case "Division":
-                calculation = new DivisionCalculation();
-                break;
-            case "Multiplication":
-                calculation = new MultiplicationCalculation();
-                break;
-            case "Power To":
-                calculation = new PowerToCalculation();
-                break;
-            default:
-                JOptionPane.showMessageDialog(null, "Please choose an operation!", "Error", JOptionPane.ERROR_MESSAGE);
-                break;
-        }
-
-        if (calculation != null) {
-            calculation.calculate(e.getFirstNumber(), e.getSecondNumber());
-            calculation.appendToResultField();
-            calculation.fillCalcData();
-        }
     }
 
     private void activateApp() {
         calculationPanelListener = new CalculationPanelListener() {
             @Override
             public void calculationEventOccurred(CalculationPanelEvent e) {
-                performCalculation(e);
+                CalcData calcData = e.getData();
+                viewPanel.appendToTextArea(calcData);
             }
         };
         calculationPanel.setCalculationPanelListener(calculationPanelListener);
@@ -88,6 +94,17 @@ public class MainFrame extends JFrame {
         menuBarPanel.setMenuBarListener(new MenuBarListener() {
             @Override
             public void saveEventOccurred(MenuBarEvent menuBarEvent) {
+                int value = fileChooser.showSaveDialog(null);
+                if (value == JFileChooser.APPROVE_OPTION) {
+                    String path = fileChooser.getSelectedFile().getPath();
+                    if (path.endsWith(".txt")) {
+                        new SaveToTxtFile();
+                    } else if (path.endsWith(".bin")) {
+                        new SaveToBinFile();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please choose a file extension!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
 
 
             }
@@ -100,37 +117,17 @@ public class MainFrame extends JFrame {
 
             @Override
             public void loadEventOccurred(MenuBarEvent menuBarEvent) {
-//                JOptionPane.showInputDialog(null, "Which format would you like to load from?",
-//                        "Load", JOptionPane.QUESTION_MESSAGE, null, new String[]{"txt", "bin"}, "txt");
-//                if (JOptionPane.YES_OPTION == 0) {
-//                    try {
-//                        FileInputStream fis = new FileInputStream("calcData.txt");
-//                        ObjectInputStream ois = new ObjectInputStream(fis);
-//                        Map<String, CalcData> calcDataMap = (Map<String, CalcData>) ois.readObject();
-//                        for (Map.Entry<String, CalcData> entry : calcDataMap.entrySet()) {
-//                            System.out.println(entry.getKey() + " " + entry.getValue());
-//                        }
-//                        ois.close();
-//                        fis.close();
-//                    } catch (IOException | ClassNotFoundException ex) {
-//                        ex.printStackTrace();
-//                    }
-//                } else {
-//                    try {
-//                        FileInputStream fis = new FileInputStream("calcData.bin");
-//                        ObjectInputStream ois = new ObjectInputStream(fis);
-//                        Map<String, CalcData> calcDataMap = (Map<String, CalcData>) ois.readObject();
-//                        for (Map.Entry<String, CalcData> entry : calcDataMap.entrySet()) {
-//                            System.out.println(entry.getKey() + " " + entry.getValue());
-//                        }
-//                        ois.close();
-//                        fis.close();
-//                    } catch (IOException | ClassNotFoundException ex) {
-//                        ex.printStackTrace();
-//                    }
-//                }
-
-
+                int value = fileChooser.showOpenDialog(null);
+                if (value == JFileChooser.APPROVE_OPTION) {
+                    String path = fileChooser.getSelectedFile().getPath();
+                    if (path.endsWith(".txt")) {
+                        new LoadFromTxtFile();
+                    } else if (path.endsWith(".bin")) {
+                        new LoadFromBinFile();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Please choose a file extension!", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
         });
 
