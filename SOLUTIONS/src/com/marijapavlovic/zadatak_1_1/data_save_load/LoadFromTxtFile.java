@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoadFromTxtFile implements LoadStrategy {
 
@@ -22,9 +24,12 @@ public class LoadFromTxtFile implements LoadStrategy {
     public StringBuffer loadFromFile(String path, ArrayList<CalcData> calcData){
         calcData.clear();
         StringBuffer sb = new StringBuffer();
-        try (BufferedReader br = new BufferedReader(new FileReader(new File(path)))){
+        try (BufferedReader br = new BufferedReader(new FileReader(path))){
             String line;
             while ((line = br.readLine()) != null){
+                if (line.trim().equals("======================================================================================")) {
+                    continue;
+                }
                 calcData.add(parseCalcData(line));
                 sb.append(line + "\n");
             }
@@ -34,12 +39,24 @@ public class LoadFromTxtFile implements LoadStrategy {
         return sb;
 
     }
-    public CalcData parseCalcData(String personString){
-        String[] calcData = personString.substring(personString.indexOf("{") + 1, personString.indexOf("}")).split(",");
-        double firstNum = Double.parseDouble(calcData[0].split("=")[1]);
-        double secondNum = Double.parseDouble(calcData[1].split("=")[1]);
-        String operation = calcData[2].split("=")[1];
-        double result = Double.parseDouble(calcData[3].split("=")[1]);
-        return new CalcData(firstNum, secondNum, operation, result);
+    public CalcData parseCalcData(String dataString) {
+        // Using regular expressions to find the relevant part
+        Pattern pattern = Pattern.compile("\\{([^}]*)\\}");
+        Matcher matcher = pattern.matcher(dataString);
+
+        if (matcher.find()) {
+            String calcDataString = matcher.group(1);
+            String[] calcDataArray = calcDataString.split(",");
+
+            double firstNum = Double.parseDouble(calcDataArray[0].split("=")[1]);
+            double secondNum = Double.parseDouble(calcDataArray[1].split("=")[1]);
+            String operation = calcDataArray[2].split("=")[1];
+            double result = Double.parseDouble(calcDataArray[3].split("=")[1]);
+
+            return new CalcData(firstNum, secondNum, operation, result);
+        } else {
+            // Handle the case where the pattern is not found
+            throw new IllegalArgumentException("Invalid data format: " + dataString);
+        }
     }
 }

@@ -11,8 +11,6 @@ public interface LoadStrategy {
 
     StringBuffer loadFromFile(String path, ArrayList<CalcData> calcData);
 
-    CalcData parseCalcData(String line);
-
     default String fileExtension(String path){
         return path.substring(path.lastIndexOf(".") + 1);
     }

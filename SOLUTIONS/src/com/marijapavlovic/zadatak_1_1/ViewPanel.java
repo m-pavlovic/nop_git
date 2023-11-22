@@ -50,5 +50,13 @@ public class ViewPanel extends JPanel {
     }
 
 
+    public void appendToTextArea(ArrayList<CalcData> calcData) {
+
+        for (CalcData data : calcData) {
+            textArea.append(data.toString() + "\n");
+        }
+    }
+
+
 
 }

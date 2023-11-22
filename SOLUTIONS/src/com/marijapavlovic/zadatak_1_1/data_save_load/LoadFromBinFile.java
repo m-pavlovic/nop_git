@@ -36,16 +36,6 @@ public class LoadFromBinFile implements LoadStrategy {
     }
 
     @Override
-    public CalcData parseCalcData(String dataString){
-        String[] calcData = dataString.substring(dataString.indexOf("{") + 1, dataString.indexOf("}")).split(",");
-        double firstNum = Double.parseDouble(calcData[0].split("=")[1]);
-        double secondNum = Double.parseDouble(calcData[1].split("=")[1]);
-        String operation = calcData[2].split("=")[1];
-        double result = Double.parseDouble(calcData[3].split("=")[1]);
-        return new CalcData(firstNum, secondNum, operation, result);
-    }
-
-    @Override
     public String fileExtension(String path) {
         return LoadStrategy.super.fileExtension(path + ".bin");
     }
