@@ -13,14 +13,6 @@ public class LoadFromTxtFile implements LoadStrategy {
 
 
     @Override
-    public void checkIfFileExists() {
-        if (!new File("calcData.txt").exists()) {
-            new File("com/marijapavlovic/zadatak_1_1/data_save_load/calcData.txt");
-        }
-
-    }
-
-    @Override
     public StringBuffer loadFromFile(String path, ArrayList<CalcData> calcData){
         calcData.clear();
         StringBuffer sb = new StringBuffer();

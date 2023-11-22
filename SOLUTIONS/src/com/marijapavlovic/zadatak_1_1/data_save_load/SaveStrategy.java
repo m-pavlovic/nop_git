@@ -8,7 +8,4 @@ public interface SaveStrategy {
 
     void saveToFile(String path, ArrayList<CalcData> calcData);
 
-    default String fileExtension(String path){
-        return path.substring(path.lastIndexOf(".") + 1);
-    }
 }

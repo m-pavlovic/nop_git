@@ -9,13 +9,6 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 public class LoadFromBinFile implements LoadStrategy {
-    @Override
-    public void checkIfFileExists() {
-        if (!new File("calcData.bin").exists()) {
-            new File("com/marijapavlovic/zadatak_1_1/data_save_load/calcData.bin");
-        }
-
-    }
 
     @Override
     public StringBuffer loadFromFile(String path, ArrayList<CalcData> calcData) {

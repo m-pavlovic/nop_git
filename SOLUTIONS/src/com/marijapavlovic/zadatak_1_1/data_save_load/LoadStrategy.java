@@ -6,9 +6,6 @@ import java.util.ArrayList;
 
 public interface LoadStrategy {
 
-
-    void checkIfFileExists();
-
     StringBuffer loadFromFile(String path, ArrayList<CalcData> calcData);
 
     default String fileExtension(String path){
