@@ -94,6 +94,7 @@ public class MainFrame extends JFrame {
         menuBarPanel.setMenuBarListener(new MenuBarListener() {
             @Override
             public void saveEventOccurred(MenuBarEvent menuBarEvent) {
+                calcData = viewPanel.getDataFromTextArea();
                 int value = fileChooser.showSaveDialog(null);
                 if (value == JFileChooser.APPROVE_OPTION) {
                     String path = fileChooser.getSelectedFile().getPath();

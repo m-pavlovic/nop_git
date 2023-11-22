@@ -22,9 +22,9 @@ public class CalcData implements Serializable {
     public String toString() {
         return "CalcData{" +
                 "firstNumber=" + firstNumber +
-                ", secondNumber=" + secondNumber +
-                ", operation='" + operation + '\'' +
-                ", result='" + result + '\'' +
+                ",secondNumber=" + secondNumber +
+                ",operation=" + operation +
+                ",result=" + result +
                 '}' + "\n" + "======================================================================================";
     }
 }
