@@ -14,6 +14,9 @@ public class MainFrame extends JFrame {
     private FormPanel formPanel;
 
     private ToolBar toolBar;
+    private TablePanel tablePanel;
+    private ProgressPanel progressPanel;
+
 
     private final JFileChooser fileChooser = new JFileChooser();
 
@@ -25,11 +28,11 @@ public class MainFrame extends JFrame {
 
     public MainFrame(){
         super("BMI APP");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(800, 600);
+        setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(450, 500);
-        setResizable(false);
         initComps();
         layoutComps();
         activateFrame();
@@ -39,6 +42,8 @@ public class MainFrame extends JFrame {
     private void initComps(){
         viewPanel = new ViewPanel();
         formPanel = new FormPanel();
+        tablePanel = new TablePanel();
+        progressPanel = new ProgressPanel();
         toolBar = new ToolBar();
         persons = new ArrayList<>();
         fileChooser.setCurrentDirectory(new File(DIR));
@@ -53,7 +58,10 @@ public class MainFrame extends JFrame {
 
     private void layoutComps(){
         setLayout(new BorderLayout());
-        add(viewPanel, BorderLayout.CENTER);
+        viewPanel.setPreferredSize(new Dimension(300, 300));
+        add(viewPanel, BorderLayout.WEST);
+        add(tablePanel, BorderLayout.CENTER);
+        add(progressPanel, BorderLayout.EAST);
         add(formPanel, BorderLayout.SOUTH);
         add(toolBar, BorderLayout.NORTH);
     }
