@@ -14,14 +14,13 @@ public class LoadFromBinFile implements LoadStrategy {
     public StringBuffer loadFromFile(String path, ArrayList<CalcData> calcData) {
         calcData.clear();
         StringBuffer sb = new StringBuffer();
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(new File(path)))){
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(path))){
             while (true){
                 CalcData data = (CalcData) ois.readObject();
                 calcData.add(data);
                 sb.append(data + "\n");
             }
         } catch (EOFException e){
-            // end of file reached
         } catch (Exception e){
             e.printStackTrace();
         }

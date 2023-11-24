@@ -19,6 +19,7 @@ public class MainFrame extends JFrame {
     private CalculationPanelListener calculationPanelListener;
     private JFileChooser fileChooser = new JFileChooser();
     private ArrayList<CalcData> calcData = new ArrayList<>();
+    private static final String DIR = "DATA";
     private MenuBarListener menuBarListener;
     private AdditionCalculation additionCalculation;
     private SubtractionCalculation subtractionCalculation;
@@ -95,9 +96,17 @@ public class MainFrame extends JFrame {
             @Override
             public void saveEventOccurred(MenuBarEvent menuBarEvent) {
                 calcData = viewPanel.getDataFromTextArea();
+                String path = DIR;
+                if (!new File(path).exists()){
+                    new File(path).mkdir();
+                }
                 int value = fileChooser.showSaveDialog(null);
                 if (value == JFileChooser.APPROVE_OPTION) {
-                    String path = fileChooser.getSelectedFile().getPath();
+                    if (fileChooser.getFileFilter().getDescription().equals("TXT files")){
+                        path += "/calcData.txt";
+                    } else if (fileChooser.getFileFilter().getDescription().equals("BIN files")){
+                        path += "/calcData.bin";
+                    }
                     if (path.endsWith(".txt")) {
                         new SaveToTxtFile().saveToFile(path, calcData);
                     } else if (path.endsWith(".bin")) {
@@ -106,8 +115,6 @@ public class MainFrame extends JFrame {
                         JOptionPane.showMessageDialog(null, "Please choose a file extension!", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-
-
             }
 
             @Override

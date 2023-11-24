@@ -47,7 +47,6 @@ public class LoadFromTxtFile implements LoadStrategy {
 
             return new CalcData(firstNum, secondNum, operation, result);
         } else {
-            // Handle the case where the pattern is not found
             throw new IllegalArgumentException("Invalid data format: " + dataString);
         }
     }
