@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements Observable {
 
     private ViewPanel viewPanel;
     private FormPanel formPanel;
@@ -23,6 +23,7 @@ public class MainFrame extends JFrame {
     private static final String DIR = "DATA";
 
     private ArrayList<Person> persons = new ArrayList<>();
+    private ArrayList<Observer> observers;
 
 
 
@@ -40,6 +41,7 @@ public class MainFrame extends JFrame {
     }
 
     private void initComps(){
+        observers = new ArrayList<>();
         viewPanel = new ViewPanel();
         formPanel = new FormPanel();
         tablePanel = new TablePanel();
@@ -93,13 +95,22 @@ public class MainFrame extends JFrame {
 
 
     private void activateFrame(){
+        addObserver(viewPanel);
+        addObserver(tablePanel);
+        addObserver(progressPanel);
 
         formPanel.setFormPanelListener(new FormPanelListener() {
             @Override
             public void formEventOccurred(FormEvent fe) {
-                Person person = fe.getPerson();
-                persons.add(person);
-                viewPanel.appendText(person + "\n");
+//                Person person = fe.getPerson();
+//                persons.add(person);
+                // how can i add maximum 5 persons and each person to show on the all 3 panels
+                if (persons.size() < 5) {
+                    persons.add(fe.getPerson());
+                    notifyObservers();
+                } else {
+                    JOptionPane.showMessageDialog(MainFrame.this, "Maximum number of persons is 5!", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -107,6 +118,8 @@ public class MainFrame extends JFrame {
             @Override
             public void clearEventOccurred() {
                 viewPanel.clearText();
+                tablePanel.clearTable();
+                progressPanel.clearProgress();
             }
 
             @Override
@@ -157,7 +170,33 @@ public class MainFrame extends JFrame {
 
     }
 
+    @Override
+    public void addObserver(Observer observer) {
+        observers.add(observer);
+        System.out.println("Observer " + observer.getClass().getSimpleName() + " added!");
 
+    }
 
+    @Override
+    public void removeObserver(Observer observer) {
+        if (observers.contains(observer)) {
+            observers.remove(observer);
+            System.out.println("Observer " + observer.getClass().getSimpleName() + " removed!");
+        }
+        else
+            System.out.println("Observer not found!");
 
+    }
+
+    @Override
+    public void notifyObservers() {
+        for (Observer observer : observers){
+            float height = formPanel.getPersonHeight();
+            float weight = formPanel.getWeight();
+            String category = formPanel.getCategory();
+            float bmi = formPanel.getBmi();
+            observer.update(height, weight, category, bmi);
+        }
+
+    }
 }

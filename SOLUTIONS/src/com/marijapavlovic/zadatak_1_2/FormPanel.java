@@ -5,6 +5,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class FormPanel extends JPanel {
 
@@ -163,7 +164,19 @@ public class FormPanel extends JPanel {
         }
     }
 
+    public float getPersonHeight() {
+        return Float.parseFloat(height.getText());
+    }
 
+    public float getWeight() {
+        return Float.parseFloat(weight.getText());
+    }
 
+    public String getCategory() {
+        return buttonGroup.getSelection().getActionCommand();
+    }
 
+    public float getBmi() {
+        return getWeight() / (getHeight() * getHeight());
+    }
 }

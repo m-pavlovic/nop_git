@@ -3,7 +3,7 @@ package com.marijapavlovic.zadatak_1_2;
 import javax.swing.*;
 import java.awt.*;
 
-public class ViewPanel extends JPanel {
+public class ViewPanel extends JPanel implements Observer {
 
     private JTextArea txtArea;
     private JScrollPane scrollPane;
@@ -32,5 +32,12 @@ public class ViewPanel extends JPanel {
 
     public void clearText(){
         txtArea.setText(null);
+    }
+
+    @Override
+    public void update(float height, float weight, String category, float bmi) {
+        Person person = new Person(height, weight, category, bmi);
+        appendText(person.toString() + "\n");
+
     }
 }
