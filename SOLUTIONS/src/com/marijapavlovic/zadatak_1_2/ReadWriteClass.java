@@ -62,7 +62,7 @@ public class ReadWriteClass {
         return sb;
     }
 
-    private static Person parsePersonFromString(String personString){
+    static Person parsePersonFromString(String personString){
         // drop Person string and parentheses {}
         String[] personData = personString.substring(personString.indexOf("{") + 1, personString.indexOf("}")).split(",");
         float height = Float.parseFloat(personData[0].split("=")[1]);

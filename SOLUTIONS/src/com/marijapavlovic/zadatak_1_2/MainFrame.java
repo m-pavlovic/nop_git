@@ -142,6 +142,8 @@ public class MainFrame extends JFrame implements Observable {
             public void loadEventOccurred() {
 
                 viewPanel.clearText();
+                tablePanel.clearTable();
+                progressPanel.clearProgress();
                 persons.clear();
                 StringBuffer sb = null;
                 int value = fileChooser.showOpenDialog(null);
@@ -154,6 +156,8 @@ public class MainFrame extends JFrame implements Observable {
                         sb = ReadWriteClass.readFromTextFile(path, persons);
                     }
                     viewPanel.appendText(sb.toString());
+                    tablePanel.loadTableFromFile(path);
+                    progressPanel.loadProgressFromFile(path);
                     System.out.println(persons);
                 }
 

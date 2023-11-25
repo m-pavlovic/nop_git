@@ -26,4 +26,20 @@ public class Person implements Serializable {
                 ", bmi=" + bmi +
                 '}';
     }
+
+    public float getPersonHeight() {
+        return height;
+    }
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public float getBmi() {
+        return bmi;
+    }
 }

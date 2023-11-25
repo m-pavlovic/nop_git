@@ -2,14 +2,17 @@ package com.marijapavlovic.zadatak_1_2;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class TablePanel extends JPanel implements Observer {
 
     private JTable table;
     private DefaultTableModel tableModel;
 
-    public TablePanel(){
+    public TablePanel() {
         initComps();
         layoutComps();
     }
@@ -42,5 +45,21 @@ public class TablePanel extends JPanel implements Observer {
         String data[][] = {{"", "", "", ""}};
         tableModel = new DefaultTableModel(data, columns);
         table.setModel(tableModel);
+    }
+
+
+    public void loadTableFromFile(String filePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            clearTable();
+
+            String line;
+            while ((line = reader.readLine()) != null) {
+                Person person = ReadWriteClass.parsePersonFromString(line);
+                String[] rowData = {String.valueOf(person.getPersonHeight()), String.valueOf(person.getWeight()), person.getCategory(), String.valueOf(person.getBmi())};
+                tableModel.addRow(rowData);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

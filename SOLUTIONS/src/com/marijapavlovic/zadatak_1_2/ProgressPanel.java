@@ -2,6 +2,10 @@ package com.marijapavlovic.zadatak_1_2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class ProgressPanel extends JPanel implements Observer {
 
@@ -42,5 +46,20 @@ public class ProgressPanel extends JPanel implements Observer {
 
     public void clearProgress() {
         progressBar.setValue(0);
+    }
+
+    public void loadProgressFromFile(String filePath) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            int rowCount = 0;
+
+            while (reader.readLine() != null) {
+                rowCount++;
+            }
+            progressBar.setMaximum(5);
+            progressBar.setValue(rowCount);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
