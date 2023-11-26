@@ -152,9 +152,9 @@ public class MainFrame extends JFrame implements Observable {
                 if (value == JFileChooser.APPROVE_OPTION){
                     String path = fileChooser.getSelectedFile().getPath();
                     if (ReadWriteStrategy.fileExtension(path).equals("bin"))
-                        sb = new ReadWriteBin().loadFromFile(path, persons);
+                        sb = new ReadWriteBin().loadFromFile(path, persons, Person.class);
                     else {
-                        sb = new ReadWriteTxt().loadFromFile(path, persons);
+                        sb = new ReadWriteTxt().loadFromFile(path, persons, Person.class);
                     }
                     viewPanel.appendText(sb.toString());
                     tablePanel.loadTableFromFile(path);

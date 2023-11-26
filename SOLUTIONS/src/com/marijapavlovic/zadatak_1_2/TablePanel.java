@@ -54,7 +54,7 @@ public class TablePanel extends JPanel implements Observer {
 
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    Person person = ReadWriteTxt.parsePersonFromString(line);
+                    Person person = ReadWriteTxt.parseElementFromString(line, Person.class);
                     String[] rowData = {String.valueOf(person.getPersonHeight()), String.valueOf(person.getWeight()), person.getCategory(), String.valueOf(person.getBmi())};
                     tableModel.addRow(rowData);
                 }
