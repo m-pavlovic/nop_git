@@ -102,9 +102,6 @@ public class MainFrame extends JFrame implements Observable {
         formPanel.setFormPanelListener(new FormPanelListener() {
             @Override
             public void formEventOccurred(FormEvent fe) {
-//                Person person = fe.getPerson();
-//                persons.add(person);
-                // how can i add maximum 5 persons and each person to show on the all 3 panels
                 if (persons.size() < 5) {
                     persons.add(fe.getPerson());
                     notifyObservers();
