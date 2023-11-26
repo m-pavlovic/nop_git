@@ -48,20 +48,6 @@ public class TablePanel extends JPanel implements Observer {
 
 
     public void loadTableFromFile(String filePath) {
-//        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-//            clearTable();
-//
-//            String line;
-//            while ((line = reader.readLine()) != null) {
-//                //Person person = ReadWriteClass.parsePersonFromString(line);
-//                Person person = ReadWriteTxt.parsePersonFromString(line);
-//                String[] rowData = {String.valueOf(person.getPersonHeight()), String.valueOf(person.getWeight()), person.getCategory(), String.valueOf(person.getBmi())};
-//                tableModel.addRow(rowData);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
         if (filePath.endsWith(".txt")) {
             try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
                 clearTable();

@@ -1,6 +1,5 @@
 package com.marijapavlovic.zadatak_1_2.data_save_load_bmi;
 
-import com.marijapavlovic.zadatak_1_1.CalcData;
 import com.marijapavlovic.zadatak_1_2.Person;
 
 import java.io.*;

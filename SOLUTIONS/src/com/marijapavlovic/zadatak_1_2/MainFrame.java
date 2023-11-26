@@ -128,13 +128,6 @@ public class MainFrame extends JFrame implements Observable {
                 int value = fileChooser.showSaveDialog(null);
                 if (value == JFileChooser.APPROVE_OPTION) {
                     String path = fileChooser.getSelectedFile().getPath();
-//                    if (ReadWriteClass.fileExtension(path).equals("bin")) {
-//                        // append Person object to the file
-//                        ReadWriteClass.writeToBinFile(path, persons);
-//                    } else {
-//                        // append toString representation of the Person object to the file
-//                        ReadWriteClass.writeToTextFile(path, persons);
-//                    }
                     if (ReadWriteStrategy.fileExtension(path).equals("bin")) {
                         // append Person object to the file
                         new ReadWriteBin().saveToFile(path, persons);
@@ -157,12 +150,6 @@ public class MainFrame extends JFrame implements Observable {
                 int value = fileChooser.showOpenDialog(null);
                 if (value == JFileChooser.APPROVE_OPTION){
                     String path = fileChooser.getSelectedFile().getPath();
-                    // read from file and then append to the viewPanel
-//                    if (ReadWriteClass.fileExtension(path).equals("bin"))
-//                        sb = ReadWriteClass.readFromBinFile(path, persons);
-//                    else {
-//                        sb = ReadWriteClass.readFromTextFile(path, persons);
-//                    }
                     if (ReadWriteStrategy.fileExtension(path).equals("bin"))
                         sb = new ReadWriteBin().loadFromFile(path, persons);
                     else {
