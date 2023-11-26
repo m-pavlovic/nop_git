@@ -10,7 +10,7 @@ public interface ReadWriteStrategy {
     StringBuffer loadFromFile(String path, ArrayList<Person> persons);
 
     void saveToFile(String path, ArrayList<Person> persons);
-    default String fileExtension(String path){
+    static String fileExtension(String path){
         return path.substring(path.lastIndexOf(".") + 1);
     }
 }

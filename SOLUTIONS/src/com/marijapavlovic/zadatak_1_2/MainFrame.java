@@ -1,5 +1,9 @@
 package com.marijapavlovic.zadatak_1_2;
 
+import com.marijapavlovic.zadatak_1_2.data_save_load_bmi.ReadWriteBin;
+import com.marijapavlovic.zadatak_1_2.data_save_load_bmi.ReadWriteStrategy;
+import com.marijapavlovic.zadatak_1_2.data_save_load_bmi.ReadWriteTxt;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
@@ -124,12 +128,19 @@ public class MainFrame extends JFrame implements Observable {
                 int value = fileChooser.showSaveDialog(null);
                 if (value == JFileChooser.APPROVE_OPTION) {
                     String path = fileChooser.getSelectedFile().getPath();
-                    if (ReadWriteClass.fileExtension(path).equals("bin")) {
+//                    if (ReadWriteClass.fileExtension(path).equals("bin")) {
+//                        // append Person object to the file
+//                        ReadWriteClass.writeToBinFile(path, persons);
+//                    } else {
+//                        // append toString representation of the Person object to the file
+//                        ReadWriteClass.writeToTextFile(path, persons);
+//                    }
+                    if (ReadWriteStrategy.fileExtension(path).equals("bin")) {
                         // append Person object to the file
-                        ReadWriteClass.writeToBinFile(path, persons);
+                        new ReadWriteBin().saveToFile(path, persons);
                     } else {
                         // append toString representation of the Person object to the file
-                        ReadWriteClass.writeToTextFile(path, persons);
+                        new ReadWriteTxt().saveToFile(path, persons);
                     }
                 }
             }
@@ -147,10 +158,15 @@ public class MainFrame extends JFrame implements Observable {
                 if (value == JFileChooser.APPROVE_OPTION){
                     String path = fileChooser.getSelectedFile().getPath();
                     // read from file and then append to the viewPanel
-                    if (ReadWriteClass.fileExtension(path).equals("bin"))
-                        sb = ReadWriteClass.readFromBinFile(path, persons);
+//                    if (ReadWriteClass.fileExtension(path).equals("bin"))
+//                        sb = ReadWriteClass.readFromBinFile(path, persons);
+//                    else {
+//                        sb = ReadWriteClass.readFromTextFile(path, persons);
+//                    }
+                    if (ReadWriteStrategy.fileExtension(path).equals("bin"))
+                        sb = new ReadWriteBin().loadFromFile(path, persons);
                     else {
-                        sb = ReadWriteClass.readFromTextFile(path, persons);
+                        sb = new ReadWriteTxt().loadFromFile(path, persons);
                     }
                     viewPanel.appendText(sb.toString());
                     tablePanel.loadTableFromFile(path);
