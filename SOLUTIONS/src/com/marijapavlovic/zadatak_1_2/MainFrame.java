@@ -118,6 +118,7 @@ public class MainFrame extends JFrame implements Observable {
         toolBar.setToolBarListener(new ToolBarListener() {
             @Override
             public void clearEventOccurred() {
+                persons.clear();
                 viewPanel.clearText();
                 tablePanel.clearTable();
                 progressPanel.clearProgress();
