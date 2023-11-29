@@ -96,17 +96,12 @@ public class MainFrame extends JFrame {
             @Override
             public void saveEventOccurred(MenuBarEvent menuBarEvent) {
                 calcData = viewPanel.getDataFromTextArea();
-                String path = DIR;
-                if (!new File(path).exists()){
-                    new File(path).mkdir();
+                if (!new File(DIR).exists()){
+                    new File(DIR).mkdir();
                 }
                 int value = fileChooser.showSaveDialog(null);
                 if (value == JFileChooser.APPROVE_OPTION) {
-                    if (fileChooser.getFileFilter().getDescription().equals("TXT files")){
-                        path += ".txt";
-                    } else if (fileChooser.getFileFilter().getDescription().equals("BIN files")){
-                        path += ".bin";
-                    }
+                    String path = fileChooser.getSelectedFile().getPath();
                     if (path.endsWith(".txt")) {
                         new SaveToTxtFile().saveToFile(path, calcData);
                     } else if (path.endsWith(".bin")) {

@@ -26,9 +26,4 @@ public class LoadFromBinFile implements LoadStrategy {
         }
         return sb;
     }
-
-    @Override
-    public String fileExtension(String path) {
-        return LoadStrategy.super.fileExtension(path + ".bin");
-    }
 }
