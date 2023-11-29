@@ -61,6 +61,10 @@ public class CalculationPanel extends JPanel {
                     double secondNumber = Double.parseDouble(secondNumberTextField.getText());
                     String operation = list.getSelectedValue();
                     CalculationStrategy calculation = getStrategy(operation);
+                    if (operation.equals("Division") && secondNumber == 0) {
+                        JOptionPane.showMessageDialog(null, "You can't divide by zero!", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
                     double result = calculation.calculate(firstNumber, secondNumber);
 
                     CalcData calcData = new CalcData(firstNumber, secondNumber, operation, result);

@@ -9,10 +9,4 @@ public class PowerToCalculation implements CalculationStrategy {
         return result;
 
     }
-
-    @Override
-    public void appendResult() {
-        CalculationPanel.resultTextField.setText(String.valueOf(result));
-
-    }
 }

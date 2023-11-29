@@ -46,7 +46,7 @@ public class MainFrame extends JFrame {
         calculationPanel = new CalculationPanel();
         menuBarPanel = new MenuBarPanel();
         calcData = new ArrayList<>();
-        fileChooser.setCurrentDirectory(new File("com/marijapavlovic/zadatak_1_1/data_save_load"));
+        fileChooser.setCurrentDirectory(new File("DATA"));
         FileNameExtensionFilter filter1 = new FileNameExtensionFilter(
                 "TXT files", "txt");
         FileNameExtensionFilter filter2 = new FileNameExtensionFilter(
@@ -103,9 +103,9 @@ public class MainFrame extends JFrame {
                 int value = fileChooser.showSaveDialog(null);
                 if (value == JFileChooser.APPROVE_OPTION) {
                     if (fileChooser.getFileFilter().getDescription().equals("TXT files")){
-                        path += "/calcData.txt";
+                        path += ".txt";
                     } else if (fileChooser.getFileFilter().getDescription().equals("BIN files")){
-                        path += "/calcData.bin";
+                        path += ".bin";
                     }
                     if (path.endsWith(".txt")) {
                         new SaveToTxtFile().saveToFile(path, calcData);
