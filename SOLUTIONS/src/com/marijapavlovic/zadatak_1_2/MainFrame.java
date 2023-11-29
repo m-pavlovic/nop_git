@@ -195,13 +195,14 @@ public class MainFrame extends JFrame implements Observable {
 
     @Override
     public void notifyObservers() {
-        for (Observer observer : observers){
-            float height = formPanel.getPersonHeight();
-            float weight = formPanel.getWeight();
-            String category = formPanel.getCategory();
-            float bmi = formPanel.getBmi();
+        for (Observer observer : observers) {
+            FormEvent formEvent = new FormEvent(this, formPanel.getPerson());
+            float height = formEvent.getPerson().getPersonHeight();
+            float weight = formEvent.getPerson().getWeight();
+            String category = formEvent.getPerson().getCategory();
+            float bmi = formEvent.getPerson().getBmi();
             observer.update(height, weight, category, bmi);
         }
-
     }
+
 }

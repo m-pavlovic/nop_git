@@ -179,4 +179,8 @@ public class FormPanel extends JPanel {
     public float getBmi() {
         return getWeight() / (getHeight() * getHeight());
     }
+
+    public Person getPerson() {
+        return new Person(getPersonHeight(), getWeight(), getCategory(), getBmi());
+    }
 }
