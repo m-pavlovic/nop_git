@@ -119,7 +119,7 @@ public class FormPanel extends JPanel {
                 String weightStr = weight.getText();
                 String category = buttonGroup.getSelection().getActionCommand();
 
-                if(isRealNumber(heightStr) && isRealNumber(weightStr)){
+                if(isRealNumber(heightStr) && isRealNumber(weightStr) && isPositiveNumber(heightStr) && isPositiveNumber(weightStr)){
                     float height = Float.parseFloat(heightStr);
                     float weight = Float.parseFloat(weightStr);
                     float bmi = weight / (height * height);
@@ -133,7 +133,7 @@ public class FormPanel extends JPanel {
                         resetFields();
                     }
                 }else{
-                    JOptionPane.showMessageDialog(FormPanel.this, "Height and weight must be real numbers", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(FormPanel.this, "Height and weight must be real and positive numbers", "Error", JOptionPane.ERROR_MESSAGE);
                     resetFields();
                 }
 
@@ -159,6 +159,15 @@ public class FormPanel extends JPanel {
             }
             Float.parseFloat(str);
             return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
+
+    private boolean isPositiveNumber(String str){
+        try{
+            float num = Float.parseFloat(str);
+            return num > 0;
         }catch (NumberFormatException e){
             return false;
         }
