@@ -60,6 +60,10 @@ public class CalculationPanel extends JPanel {
                     double firstNumber = Double.parseDouble(firstNumberTextField.getText());
                     double secondNumber = Double.parseDouble(secondNumberTextField.getText());
                     String operation = list.getSelectedValue();
+                    if (!isCalculationChosen()) {
+                        JOptionPane.showMessageDialog(null, "Please choose an operation!", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
                     CalculationStrategy calculation = getStrategy(operation);
                     if (operation.equals("Division") && secondNumber == 0) {
                         JOptionPane.showMessageDialog(null, "You can't divide by zero!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -80,6 +84,10 @@ public class CalculationPanel extends JPanel {
                 }
             }
         });
+    }
+
+    private boolean isCalculationChosen() {
+        return list.getSelectedValue() != null;
     }
 
     private CalculationStrategy getStrategy(String operation) {

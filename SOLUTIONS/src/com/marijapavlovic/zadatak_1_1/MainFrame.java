@@ -20,12 +20,6 @@ public class MainFrame extends JFrame {
     private JFileChooser fileChooser = new JFileChooser();
     private ArrayList<CalcData> calcData = new ArrayList<>();
     private static final String DIR = "DATA";
-    private MenuBarListener menuBarListener;
-    private AdditionCalculation additionCalculation;
-    private SubtractionCalculation subtractionCalculation;
-    private DivisionCalculation divisionCalculation;
-    private MultiplicationCalculation multiplicationCalculation;
-    private PowerToCalculation powerToCalculation;
 
 
     public MainFrame() {
