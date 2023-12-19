@@ -2,6 +2,7 @@ package com.marijapavlovic.zadatak_1_2;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class ViewPanel extends JPanel implements Observer {
 
@@ -35,9 +36,11 @@ public class ViewPanel extends JPanel implements Observer {
     }
 
     @Override
-    public void update(float height, float weight, String category, float bmi) {
-        Person person = new Person(height, weight, category, bmi);
-        appendText(person.toString() + "\n");
+    public <E> void update(List<E> persons) {
+        clearText();
+        for (E person : persons) {
+            appendText(person.toString() + "\n");
+        }
 
     }
 }

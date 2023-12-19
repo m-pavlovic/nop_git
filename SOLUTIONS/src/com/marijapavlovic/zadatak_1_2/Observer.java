@@ -1,9 +1,10 @@
 package com.marijapavlovic.zadatak_1_2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface Observer {
 
-    void update(float height, float weight, String category, float bmi);
+    <E> void update(List<E> persons);
 
 }

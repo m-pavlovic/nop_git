@@ -136,6 +136,7 @@ public class MainFrame extends JFrame implements Observable {
                         // append toString representation of the Person object to the file
                         new ReadWriteTxt().saveToFile(path, persons);
                     }
+                    notifyObservers();
                 }
             }
 
@@ -156,9 +157,7 @@ public class MainFrame extends JFrame implements Observable {
                     else {
                         sb = new ReadWriteTxt().loadFromFile(path, persons, Person.class);
                     }
-                    viewPanel.appendText(sb.toString());
-                    tablePanel.loadTableFromFile(path);
-                    progressPanel.loadProgressFromFile(path);
+                    notifyObservers();
                     System.out.println(persons);
                 }
 
@@ -196,7 +195,7 @@ public class MainFrame extends JFrame implements Observable {
     @Override
     public void notifyObservers() {
         for (Observer observer : observers) {
-            observer.update(persons.get(persons.size() - 1).getPersonHeight(), persons.get(persons.size() - 1).getWeight(), persons.get(persons.size() - 1).getCategory(), persons.get(persons.size() - 1).getBmi());
+            observer.update(persons);
         }
     }
 
